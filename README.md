@@ -60,7 +60,7 @@ This repository contains code for our paper [RULER: What’s the Real Context Si
     - Qwen3 results are reported by authors from this [paper](https://arxiv.org/pdf/2505.09388).
     - EXAONE 4.0 results are reported by authors from this [paper](https://arxiv.org/pdf/2507.11407).
 
-## ✓ Updates
+## ✅ Updates
 - Please follow [rulerv1-ns](https://github.com/NVIDIA/RULER/tree/rulerv1-ns) branch to use our latest evaluation pipeline.
 
 ## 💡 Requirements (deprecated)~~
