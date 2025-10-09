@@ -63,7 +63,7 @@ This repository contains code for our paper [RULER: What’s the Real Context Si
 ## ✅ Updates
 - Please follow [rulerv1-ns](https://github.com/NVIDIA/RULER/tree/rulerv1-ns) branch to use our latest evaluation pipeline.
 
-## 💡 Requirements (deprecated)~~
+## ~~💡 Requirements (deprecated)~~
 
 - Docker container: `docker pull cphsieh/ruler:0.2.0`
 - The requirements are listed in `docker/Dockerfile` and `docker/requirements.txt`. Use the following command to build the container based on NVIDIA's PyTorch container `nvcr.io/nvidia/pytorch:23.10-py3`.
@@ -73,7 +73,7 @@ DOCKER_BUILDKIT=1 docker build -f Dockerfile -t cphsieh/ruler:0.2.0 .
 ```
 
 
-~~## 🔍 Evaluate long-context LMs (deprecated)~~
+## ~~🔍 Evaluate long-context LMs (deprecated)~~
 ### 1. Download data
 - Paul Graham Essays for NIAH are downloaded from [NIAH Github](https://github.com/gkamradt/LLMTest_NeedleInAHaystack/tree/main/needlehaystack/PaulGrahamEssays) and [Paul Graham Blog](https://paulgraham.com/articles.html). 
 - QA datasets are downloaded from [SQuAD](https://rajpurkar.github.io/SQuAD-explorer/) and [HotpotQA](https://hotpotqa.github.io/).
