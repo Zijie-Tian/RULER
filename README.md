@@ -61,7 +61,8 @@ This repository contains code for our paper [RULER: What’s the Real Context Si
     - EXAONE 4.0 results are reported by authors from this [paper](https://arxiv.org/pdf/2507.11407).
 
 ## ✅ Updates
-- Please follow [rulerv1-ns](https://github.com/NVIDIA/RULER/tree/rulerv1-ns) branch to use our latest evaluation pipeline.
+- Please follow [rulerv1-ns](https://github.com/NVIDIA/RULER/tree/rulerv1-ns) branch to use our latest pipeline for RULERv1 evaluation.
+- Please follow [rulerv2-ns](https://github.com/NVIDIA/RULER/tree/rulerv2-ns) branch to use our latest pipeline for RULERv2 evaluation.
 
 ## ~~💡 Requirements (deprecated)~~
 
