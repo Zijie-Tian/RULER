@@ -31,7 +31,7 @@ fi
 # task name in `synthetic.yaml`
 synthetic=(
     "niah_single_1"
-    # "niah_single_2"
+    "niah_single_2"
     # "niah_single_3"
     # "niah_multikey_1"
     # "niah_multikey_2"

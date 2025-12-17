@@ -23,8 +23,8 @@ fi
 
 
 # Root Directories
-GPUS="1" # GPU size for tensor_parallel.
-ROOT_DIR="benchmark_root" # the path that stores generated task samples and model predictions.
+GPUS="${TENSOR_PARALLEL:-1}" # GPU size for tensor_parallel (from env or default 1)
+ROOT_DIR="../benchmark_root" # the path that stores generated task samples and model predictions (at project root).
 MODEL_DIR="/data/models" # the path that contains individual model folders from HuggingFace.
 ENGINE_DIR="." # the path that contains individual engine folders from TensorRT-LLM.
 BATCH_SIZE=1  # increase to improve GPU utilization

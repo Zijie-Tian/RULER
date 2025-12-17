@@ -32,17 +32,22 @@ IMAGE_NAME="cphsieh/ruler:0.2.3"
 # GPU configuration: "all", "0", "0,1", etc.
 GPUS="all"
 
-# Model directory (host path)
-MODEL_DIR="/home/zijie/models"
+# Container paths (Docker internal)
+CONTAINER_ROOT="/workspace/RULER"
+CONTAINER_MODEL_DIR="/data/models"
 
-# Output directory for benchmark results (host path)
-OUTPUT_DIR="$(pwd)/benchmark_root"
+# Host paths (for volume mounts)
+HOST_PROJECT_DIR="/home/zijie/Code/RULER"
+HOST_MODEL_DIR="/home/zijie/models"
 
 # Container name
 CONTAINER_NAME="ruler-benchmark"
 
 # Shared memory size
 SHM_SIZE="16g"
+
+# Tensor Parallelism (number of GPUs for model parallel)
+TENSOR_PARALLEL="4"
 
 #############################################
 # Script logic - Do not modify below
@@ -81,8 +86,8 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-# Create output directory
-mkdir -p "$OUTPUT_DIR"
+# Create output directory (at project root)
+mkdir -p "${HOST_PROJECT_DIR}/benchmark_root"
 
 # Check Docker
 if ! command -v docker &> /dev/null; then
@@ -115,9 +120,8 @@ DOCKER_CMD="$DOCKER_CMD -e HOME=$HOME"
 
 # Mount volumes
 DOCKER_CMD="$DOCKER_CMD -v $HOME:$HOME"
-DOCKER_CMD="$DOCKER_CMD -v $PROJECT_DIR:/workspace/RULER"
-DOCKER_CMD="$DOCKER_CMD -v $MODEL_DIR:/data/models"
-DOCKER_CMD="$DOCKER_CMD -v $OUTPUT_DIR:/workspace/RULER/scripts/benchmark_root"
+DOCKER_CMD="$DOCKER_CMD -v $PROJECT_DIR:$CONTAINER_ROOT"
+DOCKER_CMD="$DOCKER_CMD -v $HOST_MODEL_DIR:$CONTAINER_MODEL_DIR"
 DOCKER_CMD="$DOCKER_CMD -v /etc/passwd:/etc/passwd:ro"
 DOCKER_CMD="$DOCKER_CMD -v /etc/group:/etc/group:ro"
 
@@ -136,8 +140,11 @@ DOCKER_CMD="$DOCKER_CMD -v /etc/group:/etc/group:ro"
 [[ -n "${no_proxy:-}" ]] && DOCKER_CMD="$DOCKER_CMD -e no_proxy=$no_proxy"
 [[ -n "${NO_PROXY:-}" ]] && DOCKER_CMD="$DOCKER_CMD -e NO_PROXY=$NO_PROXY"
 
+# Environment variables - Tensor Parallelism
+DOCKER_CMD="$DOCKER_CMD -e TENSOR_PARALLEL=$TENSOR_PARALLEL"
+
 # Working directory
-DOCKER_CMD="$DOCKER_CMD -w /workspace/RULER/scripts"
+DOCKER_CMD="$DOCKER_CMD -w ${CONTAINER_ROOT}/scripts"
 
 # Print configuration
 echo -e "${GREEN}========================================${NC}"
@@ -145,8 +152,10 @@ echo -e "${GREEN}RULER Benchmark Runner (Docker)${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo "Image:        $IMAGE_NAME"
 echo "GPUs:         $GPUS"
-echo "Model Dir:    $MODEL_DIR"
-echo "Output Dir:   $OUTPUT_DIR"
+echo "TP:           $TENSOR_PARALLEL"
+echo "Model Dir:    $HOST_MODEL_DIR"
+echo "Output Dir:   ${HOST_PROJECT_DIR}/benchmark_root"
+echo "Container:    $CONTAINER_ROOT"
 echo "Model:        $MODEL_NAME"
 echo "Benchmark:    $BENCHMARK_NAME"
 echo -e "${GREEN}========================================${NC}"
