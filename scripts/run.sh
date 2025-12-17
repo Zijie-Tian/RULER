@@ -25,7 +25,7 @@ fi
 # Root Directories
 GPUS="1" # GPU size for tensor_parallel.
 ROOT_DIR="benchmark_root" # the path that stores generated task samples and model predictions.
-MODEL_DIR="../.." # the path that contains individual model folders from HUggingface.
+MODEL_DIR="/data/models" # the path that contains individual model folders from HuggingFace.
 ENGINE_DIR="." # the path that contains individual engine folders from TensorRT-LLM.
 BATCH_SIZE=1  # increase to improve GPU utilization
 
@@ -58,6 +58,14 @@ if [ -z "${TASKS}" ]; then
 fi
 
 
+# Get max sequence length for vllm
+MAX_MODEL_LEN=${SEQ_LENGTHS[0]}
+for len in "${SEQ_LENGTHS[@]}"; do
+    if [ "$len" -gt "$MAX_MODEL_LEN" ]; then
+        MAX_MODEL_LEN=$len
+    fi
+done
+
 # Start server (you may want to run in other container.)
 if [ "$MODEL_FRAMEWORK" == "vllm" ]; then
     python pred/serve_vllm.py \
@@ -65,6 +73,7 @@ if [ "$MODEL_FRAMEWORK" == "vllm" ]; then
         --tensor-parallel-size=${GPUS} \
         --dtype bfloat16 \
         --disable-custom-all-reduce \
+        --max-model-len=${MAX_MODEL_LEN} \
         &
 
 elif [ "$MODEL_FRAMEWORK" == "trtllm" ]; then

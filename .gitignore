@@ -3,3 +3,7 @@ __pycache__/
 *.jsonl
 .vscode/
 *.out
+benchmark_root/llama3.1-8b-instruct/synthetic/4096/pred
+nltk_data/tokenizers
+*.csv
+*.json
