@@ -35,6 +35,13 @@ MODEL_SELECT() {
             MODEL_TEMPLATE_TYPE="meta-llama3"
             MODEL_FRAMEWORK="vllm"
             ;;
+        glm-4-9b-chat-1m)
+            MODEL_PATH="${MODEL_DIR}/glm-4-9b-chat-1m"
+            MODEL_TEMPLATE_TYPE="chatglm-chat"
+            MODEL_FRAMEWORK="vllm"
+            TOKENIZER_PATH="${MODEL_DIR}/glm-4-9b-chat-1m"
+            TOKENIZER_TYPE="hf"
+            ;;
     esac
 
 

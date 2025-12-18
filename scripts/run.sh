@@ -74,6 +74,7 @@ if [ "$MODEL_FRAMEWORK" == "vllm" ]; then
         --dtype bfloat16 \
         --disable-custom-all-reduce \
         --max-model-len=${MAX_MODEL_LEN} \
+        --trust-remote-code \
         &
 
 elif [ "$MODEL_FRAMEWORK" == "trtllm" ]; then
