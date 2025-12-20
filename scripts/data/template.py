@@ -23,7 +23,7 @@ Templates = {
 
     'command-r-chat': "<BOS_TOKEN><|START_OF_TURN_TOKEN|><|USER_TOKEN|>{task_template}<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|CHATBOT_TOKEN|>",
 
-    'chatglm-chat': "[gMASK]sop<|user|> \n {task_template}<|assistant|> \n ",
+    'chatglm-chat': "[gMASK]<sop><|user|>\n{task_template}<|assistant|>",
     
     'RWKV': "User: hi\n\nAssistant: Hi. I am your assistant and I will provide expert full response in full details. Please feel free to ask any question and I will always answer it\n\nUser: {task_template}\n\nAssistant:",
 

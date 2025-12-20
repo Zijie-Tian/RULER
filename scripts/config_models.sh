@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEMPERATURE="0.0" # greedy
+TEMPERATURE="0.1" # slightly increased for better sampling
 TOP_P="1.0"
 TOP_K="32"
 SEQ_LENGTHS=(
@@ -40,6 +40,13 @@ MODEL_SELECT() {
             MODEL_TEMPLATE_TYPE="chatglm-chat"
             MODEL_FRAMEWORK="vllm"
             TOKENIZER_PATH="${MODEL_DIR}/glm-4-9b-chat-1m"
+            TOKENIZER_TYPE="hf"
+            ;;
+        Phi-3-mini-128k-instruct)
+            MODEL_PATH="${MODEL_DIR}/Phi-3-mini-128k-instruct"
+            MODEL_TEMPLATE_TYPE="Phi3"
+            MODEL_FRAMEWORK="vllm"
+            TOKENIZER_PATH="${MODEL_DIR}/Phi-3-mini-128k-instruct"
             TOKENIZER_TYPE="hf"
             ;;
     esac

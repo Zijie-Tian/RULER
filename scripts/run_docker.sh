@@ -30,7 +30,7 @@ set -e
 IMAGE_NAME="cphsieh/ruler:0.2.3"
 
 # GPU configuration: "all", "0", "0,1", etc.
-GPUS="all"
+GPUS="0,1,2,3,4,5"
 
 # Container paths (Docker internal)
 CONTAINER_ROOT="/workspace/RULER"
